@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AsiderNav from '../../components/Asider/AsiderNav'
-import  './admin.model.less'
+import  './Admin.model.less'
 import { withRouter } from 'react-router-dom'
 import { Layout, Icon } from 'antd';
 const { Header, Sider, Content, Footer } = Layout;
