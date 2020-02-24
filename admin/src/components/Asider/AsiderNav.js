@@ -7,16 +7,15 @@ class AsiderNav extends Component {
     constructor() {
         super()
         this.state = {
-            navList: []
+            navList: [],
+            openKeys: ['sub1'],
+            rootSubmenuKeys: ['sub1', 'sub2', 'sub4']
         }
     }
-    rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
-    state = {
-        openKeys: ['sub1'],
-    };
+
     onOpenChange = openKeys => {
         const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-        if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+        if (this.state.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
             this.setState({ openKeys });
         } else {
             this.setState({
@@ -31,10 +30,34 @@ class AsiderNav extends Component {
         })
     }
     renderNav(list) {
-        console.log(list)
-        list.map((item, index) => {
-
+        if (!list.length) { return '暂无数据' }
+        let result = list.map((item, index) => {
+            if (!item.children) {
+                return (
+                    <Menu.Item key={item.id}>
+                        <Link to={item.path}>
+                            <Icon type={item.icon || 'home'}></Icon>
+                            <span>{item.name || '为加载出数据'}</span>
+                        </Link>
+                    </Menu.Item>
+                )
+            } else {
+                return (
+                    <SubMenu
+                        key={item.id}
+                        title={
+                            <span>
+                                <Icon type={item.icon || 'home'}></Icon>
+                                <span>{item.name}</span>
+                            </span>
+                        }
+                    >
+                        {this.renderNav(item.children)}
+                    </SubMenu>
+                )
+            }
         })
+        return result
     }
     render() {
         let { navList } = this.state

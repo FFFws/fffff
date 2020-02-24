@@ -4,18 +4,18 @@ export const getNav = (info) => {
     return new Promise((resolve, eject) => {
         let ids = info.rootIds
         let result = []
-        allList.map((item, index) => {
+        allList.forEach((item, index) => {
             // 一维存在直接添加
             if (ids.indexOf(item.id) !== -1) {
                 result.push(item)
                 // 对二维进行判断
-            } else if (ids.indexOf(item.id) == -1 && item.children) {
+            } else if (ids.indexOf(item.id) === -1 && item.children) {
                 // 遍历二维
                 let child = []
-                item.children.map((citem, cindex) => {
+                item.children.forEach((citem, cindex) => {
                     // 二维存在
                     if (ids.indexOf(citem.id) !== -1) {
-                        child = citem
+                        child.push(citem)
                     }
                 })
                 item.children = child

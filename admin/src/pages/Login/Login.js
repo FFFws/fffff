@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 class Login extends Component {
     setLocal() {
-        let info = JSON.stringify({ err: 0, msg: 'ok', token: '12313', rootIds: ['1', '0', '2-0', '2-1', '2-3'] })
+        let info = JSON.stringify({ err: 0, msg: 'ok', token: '12313', rootIds: ['1', '0', '2-0', '2-0', '2-3'] })
         localStorage.setItem('info', info)
     }
 
