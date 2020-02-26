@@ -1,17 +1,36 @@
 import React, { Component } from 'react'
 import AsiderNav from '../../components/Asider/AsiderNav'
-import  './Admin.model.less'
+import './Admin.model.less'
 import { withRouter } from 'react-router-dom'
-import { Layout, Icon } from 'antd';
+import { Layout, Icon, Menu, message } from 'antd';
+import HeaderDropdown from '../../components/Dropdown/HeaderDropdown'
+import { getStorage } from '../../utils/storage'
 const { Header, Sider, Content, Footer } = Layout;
 
 
 class Admin extends Component {
-
+    constructor() {
+        super()
+        this.state = {
+            collapsed: false,
+        }
+    }
+    componentDidMount() {
+        if (!getStorage()) {
+            message.error('token失效，请重新登录', 1, () => {
+                this.props.history.replace('/login')
+            })
+        }
+    }
+    toggle = () => {
+        this.setState({
+            collapsed: !this.state.collapsed,
+        });
+    };
     render() {
         return (
             <Layout className='Admin'>
-                <Sider >
+                <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
                     <AsiderNav></AsiderNav>
                 </Sider>
                 <Layout>
@@ -21,11 +40,11 @@ class Admin extends Component {
                     }}>
                         <Icon
                             className="trigger"
+                            type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                            onClick={this.toggle}
                         />
-                        头部
-                        <button className='login' onClick={() => {
-                            this.props.history.push('/login')
-                        }}>去登录页面</button>
+                        <h2 style={{ fontWeight: "bold", fontSize: 30 }}>喜来登酒店后台管理系统</h2>
+                        <HeaderDropdown ></HeaderDropdown>
                     </Header>
                     <Content className='content'
                         style={{

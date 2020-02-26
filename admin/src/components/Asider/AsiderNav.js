@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, message } from 'antd';
 import { Link } from 'react-router-dom'
 import { getNav } from './asiderFun'
+import { getStorage } from '../../utils/storage'
 const { SubMenu } = Menu;
+
 class AsiderNav extends Component {
     constructor() {
         super()
@@ -24,10 +26,12 @@ class AsiderNav extends Component {
         }
     };
     componentDidMount() {
-        let info = JSON.parse(localStorage.getItem('info'))
-        getNav(info).then(data => {
-            this.setState({ navList: data })
-        })
+        if (getStorage()) {
+            let info = getStorage()
+            getNav(info).then(data => {
+                this.setState({ navList: data })
+            })
+        }
     }
     renderNav(list) {
         if (!list.length) { return '暂无数据' }
@@ -70,9 +74,6 @@ class AsiderNav extends Component {
                 style={{
                     overflow: 'auto',
                     height: '100vh',
-                    position: 'fixed',
-                    left: 0,
-                    width: 200,
                 }}>
                 {this.renderNav(navList)}
             </Menu>

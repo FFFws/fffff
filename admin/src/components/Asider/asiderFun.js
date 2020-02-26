@@ -2,7 +2,7 @@ import allList from './rootAllList'
 
 export const getNav = (info) => {
     return new Promise((resolve, eject) => {
-        let ids = info.rootIds
+        let ids = info.rootList  //['1', '0', '2-0', '2-0', '2-3']
         let result = []
         allList.forEach((item, index) => {
             // 一维存在直接添加
