@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu, Icon, message } from 'antd';
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { getNav } from './asiderFun'
 import { getStorage } from '../../utils/storage'
 const { SubMenu } = Menu;
@@ -25,6 +25,9 @@ class AsiderNav extends Component {
             });
         }
     };
+    link = ({ key }) => {
+        this.props.history.push(key)
+    }
     componentDidMount() {
         if (getStorage()) {
             let info = getStorage()
@@ -38,11 +41,11 @@ class AsiderNav extends Component {
         let result = list.map((item, index) => {
             if (!item.children) {
                 return (
-                    <Menu.Item key={item.id}>
-                        <Link to={item.path}>
-                            <Icon type={item.icon || 'home'}></Icon>
-                            <span>{item.name || '为加载出数据'}</span>
-                        </Link>
+                    <Menu.Item key={item.path} >
+                        {/* <Link to={item.path}> */}
+                        <Icon type={item.icon || 'home'}></Icon>
+                        <span>{item.name || '为加载出数据'}</span>
+                        {/* </Link> */}
                     </Menu.Item>
                 )
             } else {
@@ -71,6 +74,7 @@ class AsiderNav extends Component {
                 theme='dark'
                 openKeys={this.state.openKeys}
                 onOpenChange={this.onOpenChange}
+                onClick={this.link}
                 style={{
                     overflow: 'auto',
                     height: '100vh',
@@ -80,4 +84,4 @@ class AsiderNav extends Component {
         );
     }
 }
-export default AsiderNav
+export default withRouter(AsiderNav)
