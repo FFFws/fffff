@@ -103,9 +103,14 @@ module.exports = function(proxy, allowedHost) {
     // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
     proxy:{
       '/user':{
-        target:'http://localhost:3003',
+        target:'http://localhost:3004',
         changeOrigin:true,
         pathRewrite:{"^/user":''}
+      },
+      '/list':{
+        target:'http://39.99.182.33',
+        changeOrigin:true,
+        pathRewrite:{'/list':''}
       }
     },
     before(app, server) {

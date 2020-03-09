@@ -1,0 +1,7 @@
+export const ADD_LIST = 'ADD_LIST'
+export const CHANGE_LIST_NUM = 'CHANGE_LIST_NUM'
+export const CHANGE_BOOL = 'CHANGE_BOOL'
+export const READ_ALL='READ_ALL'
+export const READ_ONE='READ_ONE'
+export const START='START'
+export const END='END'

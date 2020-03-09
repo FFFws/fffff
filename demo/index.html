@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <script type="text/babel">
+        class Demo extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    counter: 0
+                }
+            }
+            change(tag) {
+                let { counter } = this.state
+                if (tag === "+" && counter < 9) {
+                    this.setState({ counter: counter + 1 })
+                } else if (tag === "-" && counter > 0) {
+                    this.setState({ counter: counter - 1 })
+                }
+            }
+            render() {
+
+                let { counter } = this.state
+                return (
+                    <div>
+                        <button onClick={this.change.bind(this, '+')}>+</button>
+                        <button onClick={this.change.bind(this, "-")}>-</button>
+                        counter:{counter}
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Demo />, app)
+    </script>
+</body>
+
+</html>

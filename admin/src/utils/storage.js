@@ -1,6 +1,5 @@
 export const setStorage = (value) => {
-    let value_ = JSON.stringify(value)
-    localStorage.setItem('key', value_)
+    localStorage.setItem('key', JSON.stringify(value))
 }
 
 export const getStorage = () => {

@@ -1,3 +1,17 @@
+/**
+ * @登陆界面
+ * 页面布局
+ * 信息验证
+ * 点击/回车事件提交信息，调取接口，取回token
+ * 存储token，username
+ * 
+ * 七天免登录
+ * 存token，存储时间，有效时间
+ * 每次调取接口，先判断有效期，在携带token
+ * */ 
+
+
+
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox, Card, message } from 'antd';
 import styles from './login.model.less'
@@ -20,6 +34,7 @@ class Login extends Component {
                     })
                 })
                 .catch(err => {
+                    console.log(err)
                     message.error('登陆失败，请重试', 2)
                 })
         })
@@ -55,6 +70,11 @@ class Login extends Component {
                                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,1)' }} />}
                                 type="password"
                                 placeholder="Password"
+                                onKeyDown={(e) => {
+                                    if (e.keyCode == 13) {
+                                        this.login()
+                                    }
+                                }}
                             />,
                         )}
                     </Form.Item>
@@ -76,3 +96,4 @@ class Login extends Component {
     }
 }
 export default Form.create({})(Login)
+

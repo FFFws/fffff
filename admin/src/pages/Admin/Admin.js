@@ -5,6 +5,9 @@ import { withRouter } from 'react-router-dom'
 import { Layout, Icon, Menu, message } from 'antd';
 import HeaderDropdown from '../../components/Dropdown/HeaderDropdown'
 import { getStorage } from '../../utils/storage'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actionCreator from '../../store/actionCreator'
 const { Header, Sider, Content, Footer } = Layout;
 
 
@@ -22,6 +25,7 @@ class Admin extends Component {
             })
         }
     }
+   
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
@@ -54,7 +58,6 @@ class Admin extends Component {
                             minHeight: 280,
                         }}>
                         {this.props.children}
-
                     </Content>
                     <Footer>脚步</Footer>
                 </Layout>
@@ -62,4 +65,6 @@ class Admin extends Component {
         );
     }
 }
-export default withRouter(Admin)
+export default connect(state => state, (dispatch) => {
+    return bindActionCreators(actionCreator, dispatch)
+})(withRouter(Admin))

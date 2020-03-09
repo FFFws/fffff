@@ -2,10 +2,9 @@ import axios from 'axios'
 import { getStorage } from '../utils/storage'
 
 axios.interceptors.request.use(function (config) {
-    if (getStorage) {
+    if (getStorage()) {
         // config.headers['token'] = getStorage().token
         config.token = getStorage().token
-        console.log(config)
     }
     return config;
 }, function (error) {
